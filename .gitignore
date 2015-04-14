@@ -1,7 +1,4 @@
-dist/
-node_modules/
-bower_components/
-components/
-otp.js
-otp.css
-otpjs/
+build
+client/build
+components
+node_modules

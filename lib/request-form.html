@@ -1,0 +1,171 @@
+<div class="form-horizontal">
+  <div class="visibleSettings">
+    <div class="form-group fromPlaceControl">
+      <div class="col-sm-12">
+        <input id="fromPlace" class="form-control apiParam" placeholder="Start Address">
+      </div>
+    </div>
+
+    <div class="form-group toPlaceControl">
+      <div class="col-sm-12">
+        <input id="toPlace" class="form-control apiParam" placeholder="End Address">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group request-form-buttons">
+    <div class="col-sm-3">
+      <button class="btn btn-default btn-block reverse-direction" title="Reverse direction"><span class="glyphicon glyphicon-retweet"></span></button>
+    </div>
+    <div class="col-sm-9">
+      <button id="hideSettings" class="btn toggleSettings btn-default btn-block">Hide Settings <span class="glyphicon glyphicon-chevron-up"></span></button>
+      <button id="showSettings" class="btn toggleSettings btn-default btn-block">Show Settings <span class="glyphicon glyphicon-chevron-down"></span></button>
+    </div>
+  </div>
+
+  <div id="hidableSettings">
+    <div class="form-group arriveByControl">
+      <div class="col-sm-12">
+        <select id="arriveBy" class="apiParam form-control" placeholder="Arrive">
+          <option value="true">Arrive at</option>
+          <option value="false" selected>Depart by</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group timeControl">
+      <div class="col-sm-12">
+        <div class="input-group date" id="time">
+          <input type="text" class="form-control apiParam" data-format="HH:mm PP">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-time"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group dateControl">
+      <div class="col-sm-12">
+        <div class="input-group date" id="date">
+          <input type="text" class="form-control apiParam">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-time"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group travelByControl">
+      <label for="mode" class="col-sm-4 control-label">Travel by</label>
+      <div class="col-sm-8">
+        <select id="mode" class="apiParam form-control" placeholder="Arrive">
+          <option value="TRANSIT,WALK" selected>Transit</option>
+          <option value="TRAINISH,WALK">Train only</option>
+          <option value="BUS,WALK">Bus only</option>
+          <option value="WALK">Walk only</option>
+          <option value="BICYCLE">Bike only</option>
+          <option value="TRANSIT,BICYCLE">Transit & Bike</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group optimizeControl">
+      <label for="type" class="col-sm-4 control-label">Find</label>
+      <div class="col-sm-8">
+        <select id="optimize" class="apiParam form-control" placeholder="Arrive">
+          <option value="QUICK" selected>Quickest trip</option>
+          <option value="TRANSFERS">Fewest transfers</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-4 col-sm-8">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="wheelchairAccessible" id="wheelchairAccessible"> Wheelchair Accessible
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group maxWalkControl">
+      <label for="maxWalkDist" class="col-sm-4 control-label">Max walk</label>
+      {{#metric}}
+      <div class="col-sm-8">
+        <select id="maxWalkDistance" class="apiParam form-control" placeholder="Arrive">
+          <option value="250">1/4 km</option>
+          <option value="500">1/2 km</option>
+          <option value="1000" selected>1 km</option>
+          <option value="2500">2.5 km</option>
+          <option value="5000">5 km</option>
+        </select>
+      </div>
+      {{/metric}}
+
+      {{^metric}}
+      <div class="col-sm-8">
+        <select id="maxWalkDistance" class="apiParam form-control" placeholder="Arrive">
+          <option value="402">1/4 mile</option>
+          <option value="804">1/2 mile</option>
+          <option value="1223">3/4 mile</option>
+          <option value="1609">1 mile</option>
+          <option value="3218">2 miles</option>
+          <option value="4828">3 miles</option>
+          <option value="8047" selected>5 miles</option>
+        </select>
+      </div>
+      {{/metric}}
+    </div>
+
+    <div class="form-group maxBikeControl">
+      <label class="col-sm-4 control-label" for="maxWalkDist">Max bike</label>
+
+      {{#metric}}
+      <div class="col-sm-8">
+        <select id="maxBikeDistance" class="apiParam form-control" placeholder="Arrive">
+          <option value="1000">1 km</option>
+          <option value="2500">2.5 km</option>
+          <option value="5000" selected>5 km</option>
+          <option value="10000">10 km</option>
+          <option value="15000">15 km</option>
+        </select>
+      </div>
+      {{/metric}}
+
+      {{^metric}}
+      <div class="col-sm-8">
+        <select id="maxBikeDistance" class="apiParam form-control" placeholder="Arrive">
+          <option value="804">1/2 mile</option>
+          <option value="1609">1 mile</option>
+          <option value="4026" selected>2.5 miles</option>
+          <option value="8047">5 miles</option>
+          <option value="16093">10 miles</option>
+        </select>
+      </div>
+      {{/metric}}
+    </div>
+
+    <div class="bikeTriangleControl">
+      <div id="bikeTriangle" style="height: 110px; cursor: pointer;"></div>
+    </div>
+  </div>
+
+  <div class="form-group request-form-search-buttons">
+    <div class="col-sm-12">
+      <button class="search-button btn btn-primary btn-block">Submit <span class="glyphicon glyphicon-search"></span></button>
+      <div class="searching-button hidden">
+        <button class="btn btn-primary btn-block disabled" diabled>Searching <span class="glyphicon glyphicon-refresh spin"></span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="nextPreviousLast hidden">
+    <div class="btn-group btn-group-justified">
+      <a class="btn btn-sm btn-default first"><i class="glyphicon glyphicon-fast-backward"></i> First</a>
+      <a class="btn btn-sm btn-default previous"><i class="glyphicon glyphicon-backward"></i> Previous</a>
+      <a class="btn btn-sm btn-default next">Next <i class="glyphicon glyphicon-forward"></i></a>
+      <a class="btn btn-sm btn-default last">Last <i class="glyphicon glyphicon-fast-forward"></i></a>
+    </div>
+  </div>
+</div>

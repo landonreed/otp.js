@@ -159,3 +159,17 @@
 .otp-mapContextMenuItem:hover {
     background: #ddd;
 }
+
+@media print {
+	body {
+		overflow: visible !important;
+	}
+
+	#sidebar {
+		overflow: visible !important;
+	}
+
+	#map {
+		display: none !important;
+	}
+}

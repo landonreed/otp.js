@@ -1,41 +1,38 @@
-COMPONENT := ./node_modules/.bin/component
-JSHINT := ./node_modules/.bin/jshint
-SERVE := ./node_modules/.bin/serve
+
+BEAUTIFY = js-beautify
+COMPONENT = component
+JSHINT = jshint
+SERVE = serve
 
 JS := $(shell find lib -name '*.js' -print)
 
 PORT = 3000
 
-build: otp.js
+build: components $(JS)
+	@$(COMPONENT) build --dev
 
 clean:
 	rm -rf build components node_modules
 
 components: component.json
-	$(COMPONENT) install --dev --verbose
+	@$(COMPONENT) install --dev
 
 install: node_modules
+	@npm install -g component js-beautify jshint myth serve
 
-# lint: $(JS)
-# 	$(JSHINT) --verbose $(JS)
+beautify: $(JS)
+	@$(BEAUTIFY) --replace $(JS)
+
+lint: $(JS)
+	@$(JSHINT) --verbose $(JS)
 
 node_modules: package.json
-	npm install
-
-release: otp.min.js
+	@npm install
 
 server:
-	$(SERVE) --port $(PORT)
-
-otp.js: components $(JS)
-	$(MAKE) lint
-	$(COMPONENT) build --dev --verbose --out client/build --prefix '.'
-	$(COMPONENT) build --verbose --standalone otp --out . --name otp  --prefix '.'
-
-otp.min.js: otp.js
-	$(COMPONENT) build --verbose --use component-uglifyjs --standalone otp --out . --name otp.min  --prefix '.'
+	@$(SERVE) --port $(PORT)
 
 watch:
 	watch $(MAKE) build
 
-.PHONY: build clean install lint release server watch
+.PHONY: beautify build clean install lint release server watch
