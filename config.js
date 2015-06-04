@@ -1,11 +1,11 @@
 window.OTP_config = {
 
-  initLatLng: [42.703632059618045, -73.7948226928711],
+  initLatLng: [33.750159, -84.388847],
 
-  osmMapKey: 'conveyal.ikck6888', // temporary -- do not use in production, provide your own
-  aerialMapKey: 'conveyal.map-a3mk3jug', // unset
+  osmMapKey: 'atlregional.tm2-basemap', // temporary -- do not use in production, provide your own
+  aerialMapKey: 'atlregional.tm2-basemap', // unset
 
-  otpApi: 'http://otp-test.nysdot.conveyal.com/otp/routers/',
+  otpApi: 'http://opentrip.atlantaregion.com/otp-rest-servlet/ws/',
   esriApi: 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/',
 
   reverseGeocode: true
