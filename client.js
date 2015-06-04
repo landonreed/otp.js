@@ -5,31 +5,34 @@ $(document).ready(function() {
   var log = OTP.log('client');
 
   // set up the leafet map object
-  var map = L.map('map').setView(window.OTP_config.initLatLng, (window.OTP_config
+  L.mapbox.accessToken = 'pk.eyJ1IjoiYXRscmVnaW9uYWwiLCJhIjoiQmZ6d2tyMCJ9.oENm3NSf--qHrimdm9Vvdw';
+  var map = L.mapbox.map('map', window.OTP_config.osmMapKey).setView(window.OTP_config.initLatLng, (window.OTP_config
     .initZoom || 13));
+  // var map = L.map('map').setView(window.OTP_config.initLatLng, (window.OTP_config
+  //   .initZoom || 13));
   map.attributionControl.setPrefix('');
 
   // create OpenStreetMap tile layers for streets and aerial imagery
-  var osmLayer = L.tileLayer('//{s}.tiles.mapbox.com/v3/' + window.OTP_config
-    .osmMapKey + '/{z}/{x}/{y}.png', {
-      subdomains: ['a', 'b', 'c', 'd'],
-      attribution: 'Street Map <a href="//mapbox.com/about/maps">Terms & Feedback</a>'
-    });
-  var aerialLayer = L.tileLayer('//{s}.tiles.mapbox.com/v3/' + window.OTP_config
-    .aerialMapKey + '/{z}/{x}/{y}.png', {
-      subdomains: ['a', 'b', 'c', 'd'],
-      attribution: 'Satellite Map <a href="//mapbox.com/about/maps">Terms & Feedback</a>'
-    });
+  // var osmLayer = L.tileLayer('http://{s}.tiles.mapbox.com/v3/' + window.OTP_config
+  //   .osmMapKey + '/{z}/{x}/{y}.png' + '?access_token=pk.eyJ1IjoiYXRscmVnaW9uYWwiLCJhIjoiQmZ6d2tyMCJ9.oENm3NSf--qHrimdm9Vvdw', {
+  //     subdomains: ['a', 'b', 'c', 'd'],
+  //     attribution: 'Street Map <a href="//mapbox.com/about/maps">Terms & Feedback</a>'
+  //   });
+  // var aerialLayer = L.tileLayer('http://{s}.tiles.mapbox.com/v3/' + window.OTP_config
+  //   .aerialMapKey + '/{z}/{x}/{y}.png'  + '?access_token=pk.eyJ1IjoiYXRscmVnaW9uYWwiLCJhIjoiQmZ6d2tyMCJ9.oENm3NSf--qHrimdm9Vvdw', {
+  //     subdomains: ['a', 'b', 'c', 'd'],
+  //     attribution: 'Satellite Map <a href="//mapbox.com/about/maps">Terms & Feedback</a>'
+  //   });
 
   // create a leaflet layer control and add it to the map
-  var baseLayers = {
-    'Street Map': osmLayer,
-    'Satellite Map': aerialLayer
-  };
-  L.control.layers(baseLayers).addTo(map);
+  // var baseLayers = {
+  //   'Street Map': osmLayer,
+  //   'Satellite Map': aerialLayer
+  // };
+  // L.control.layers(baseLayers).addTo(map);
 
   // display the OSM street layer by default
-  osmLayer.addTo(map);
+  // osmLayer.addTo(map);
 
   // disable map drag on mobile
   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -38,7 +41,7 @@ $(document).ready(function() {
 
   // create the main OTP trip plan request model and point it to the API
   var requestModel = new OTP.models.PlanRequest();
-  requestModel.urlRoot = window.OTP_config.otpApi + 'default/plan';
+  requestModel.urlRoot = window.OTP_config.otpApi + 'plan';
 
   // create and render the main request view, which displays the trip
   // preference form
